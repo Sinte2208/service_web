@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\Api\OrdersController;
+use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\ProductsController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -18,4 +20,11 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-route::get('v1/Orders', [OrdersController::class, 'index']);
+route::get('v1/Products', [ProductsController::class, 'index']);
+
+Route::group(['middleware' => 'api','prefix' => 'auth'], function ($router) {
+    Route::post('login', [\App\Http\Controllers\Api\AuthController::class, 'login']);
+    Route::post('logout', [\App\Http\Controllers\Api\AuthController::class, 'logout']);
+    Route::post('refresh', [\App\Http\Controllers\Api\AuthController::class, 'refresh']);
+    Route::post('me', [\App\Http\Controllers\Api\AuthController::class, 'me']);
+});

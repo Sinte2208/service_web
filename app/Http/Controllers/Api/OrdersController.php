@@ -11,8 +11,8 @@ class OrdersController extends Controller
     //
     public function index()
     {
-        $data = Orders::all();
-        //$data = Orders::with('costumers')->get();
+        //$data = Orders::all();
+        $data = Orders::with('customers')->get();
         return response()-> json ($data, 200);
 
     }

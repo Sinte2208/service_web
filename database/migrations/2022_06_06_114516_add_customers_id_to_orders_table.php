@@ -14,7 +14,7 @@ class AddCustomersIdToOrdersTable extends Migration
     public function up()
     {
         Schema::table('orders', function (Blueprint $table) {
-            $table->integer('costumers_id');
+            $table->integer('customers_id');
         });
     }
 
